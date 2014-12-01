@@ -15,6 +15,10 @@ public class WordSearch {
     wordGrid = new char[rows][cols];
   }
   
+  public String toString() {
+    
+  }
+  
   public boolean addWordH(int row, int col, String s) {
     for (int i=0;i<wordGrid.length;i++) {
       for (int j=0;j<wordGrid[i].length;j++) {
