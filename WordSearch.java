@@ -1,7 +1,7 @@
 public class WordSearch {
-  private char[][] wordGrid;
-  private ArrayList <String> hidden;
-  private ArrayList <String> possible; //Optional
+  char[][] wordGrid;
+  ArrayList <String> hidden;
+  ArrayList <String> possible; //Optional
   
   //Default Constructor
   public WordSearch {
@@ -11,9 +11,5 @@ public class WordSearch {
   
   public WordSearch (int rows, int cols) {
     wordGrid = new char[rows][cols];
-  }
-  
-  public boolean addWordH(int row, int col, String s) {
-      
-  }
+  //Jeffrey is ball.}
 }
