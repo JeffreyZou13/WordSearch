@@ -16,7 +16,17 @@ public class WordSearch {
   }
   
   public String toString() {
-    
+    for (int i = 0; i < wordGrid.length; i++) {
+      for (int j = 0; j < wordGrid[i].length; j++) {
+        multi[i][j] += (i * wordGrid[i].length) + j;
+        System.out.print(wordGrid[i][j] + " ");
+      }
+      System.out.print("\n");
+    }
+    System.out.println(Words in Grid:);
+    for (int k = 0 ; k < hidden.size(); k++) {
+      System.out.pritnln(hidden.get(k));
+    }
   }
   
   public boolean addWordH(int row, int col, String s) {
