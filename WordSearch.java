@@ -36,16 +36,23 @@ public class WordSearch {
   }
   
   public boolean addWordH(int row, int col, String s) {
-    if (s.length() <= wordGrid[row].length - col) { //Checks if enough "space" for String going forward
-      for (int i = col, int j = 0; i < s.length() + col - 1; i++, j++){//j is index of String
-        if (wordGrid[row][i] != '-'){ 
-          if (wordGrid[row][i] != s.charAt(j)){
-            return false;
-          }
-        }
-      }
+    // If enough space to go forward, check forward; If result is false, Check Backwards
+    // If not enough space to go foward, check backwards; enough space, then whats in spaces
+    boolean canAddFor = true;
+    if (s.length() <= wordGrid[row].length - col) //Checks if enough "space" for String going forward
+      while (canAddFor == true)
+        for (int i = col, int j = 0; i < s.length() + col - 1; i++, j++)//j is index of String
+          if (wordGrid[row][i] != '-')
+            if (wordGrid[row][i] != s.charAt(j))
+              canAdd = false;
+    if (canAddFor == true){ //If can add forward, won't check backwards
+      for (int a = col, int b = 0; a <s.length() + col - 1; a++, j++)
+        wordgrid[row][a] = s.charAt(b);
+      return true;
     }
-      //another if for checking spaces backwards
+    else{ //Backwards Check
+      
+    }
   }
   
   public boolean addWordV(int row, int col, String s) {
