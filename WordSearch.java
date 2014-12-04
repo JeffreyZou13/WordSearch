@@ -65,7 +65,7 @@ public class WordSearch {
     Random r = new Random();
     for (int i=0;i<wordGrid.length;i++) 
       for (int j=0;j<wordGrid[i].length;j++)
-        if (wordGrid[i][j].equal("\u0000")) {
+        if (wordGrid[i][j].equal("-")) {
           char c = (char) (r.nextInt(26)+ 'a');
           wordGrid[i][j] = c;
         }
