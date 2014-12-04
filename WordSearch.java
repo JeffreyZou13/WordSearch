@@ -39,8 +39,7 @@ public class WordSearch {
     for (int i=0;i<wordGrid.length;i++) {
       for (int j=0;j<wordGrid[i].length;j++) {
         if (s.length() <= wordGrid[i].length-j) {
-          //check character if any & add if no characters
-          //also check reverse
+          
           return true;
         }
       }
@@ -48,14 +47,13 @@ public class WordSearch {
   }
   
   public boolean addWordV(int row, int col, String s) {
-    for (int i=0;i<wordGrid.length;i++) {
-      for (int j=0;j<wordGrid[i];j++) {
-        if (s.length<=wordGrid.length-i) {
-          //do same thing as the horizontal thingy
-          return true;
-        }
-      }
-    }
+        if (s.length > col.length) 
+        //Basically this checks if it has enough room to put it ->return false if not
+          return false;
+          
+        for (int i=row;i < s.length+row-1;i++)
+          if (s.length-(row+i)>0) 
+            wordGrid[row-i][col]=s[i];
   }
   
   public boolean addWordD(int row, int col, String s) {
