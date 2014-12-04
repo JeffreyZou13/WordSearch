@@ -18,7 +18,7 @@ public class WordSearch {
   public String toString() {
     for (int i = 0; i < wordGrid.length; i++) {
       for (int j = 0; j < wordGrid[i].length; j++) {
-        multi[i][j] += (i * wordGrid[i].length) + j;
+        wordGrid[i][j] += (i * wordGrid[i].length) + j;
         System.out.print(wordGrid[i][j] + " ");
       }
       System.out.print("\n");
