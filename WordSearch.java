@@ -47,13 +47,16 @@ public class WordSearch {
   }
   
   public boolean addWordV(int row, int col, String s) {
-        if (s.length > col.length) 
-        //Basically this checks if it has enough room to put it ->return false if not
-          return false;
-          
-        for (int i=row;i < s.length+row-1;i++)
-          if (s.length-(row+i)>0) 
-            wordGrid[row-i][col]=s[i];
+    if (s.length > col.length) 
+    //Basically this checks if it has enough room to put it ->return false if not
+      return false;
+      
+    for (int i=row;i < s.length+row-1;i++)
+      if (s.length-(row+i)>0 && wordGrid[row][col]==s.charAt(i)) { 
+        wordGrid[row-i][col]=s.charAt(i);
+        return true;
+      }       
+    return false;
   }
   
   public boolean addWordD(int row, int col, String s) {
