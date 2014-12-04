@@ -9,10 +9,16 @@ public class WordSearch {
   public WordSearch {
     //Sets the grid to 10x10
     wordGrid = new char[10][10];
+    for (int i=0;i<wordGrid.length;i++) {
+      for (int j=0;j<wordGrid[i].length;j++) {
+        wordGrid[i][j]="-";
   }
   
   public WordSearch (int rows, int cols) {
     wordGrid = new char[rows][cols];
+    for (int i=0;i<wordGrid.length;i++) {
+      for (int j=0;j<wordGrid[i].length;j++) {
+        wordGrid[i][j]="-";
   }
   
   public String toString() {
