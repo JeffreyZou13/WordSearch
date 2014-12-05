@@ -39,20 +39,36 @@ public class WordSearch {
     // If enough space to go forward, check forward; If result is false, Check Backwards
     // If not enough space to go foward, check backwards; enough space, then whats in spaces
     boolean canAddFor = true;
-    if (s.length() <= wordGrid[row].length - col) //Checks if enough "space" for String going forward
+    if (s.length() <= (wordGrid[row].length - col) ) //Checks if enough "space" for String going forward
       while (canAddFor == true)
-        for (int i = col, int j = 0; i < s.length() + col - 1; i++, j++)//j is index of String
+        for (int i = col, int j = 0; i < (s.length() + col - 1); i++, j++)//j is index of String
           if (wordGrid[row][i] != '-')
             if (wordGrid[row][i] != s.charAt(j))
-              canAdd = false;
+              canAddFor = false;
+    else
+      canAddFor = false;
     if (canAddFor == true){ //If can add forward, won't check backwards
       for (int a = col, int b = 0; a <s.length() + col - 1; a++, j++)
         wordgrid[row][a] = s.charAt(b);
       return true;
     }
+    
     else{ //Backwards Check
-      
+      boolean canAddBack = true;
+      if(s.length() <= (col + 1) ) // Length Check
+        for (int x = col, int y = 0; x >= (col + 1 - s.length()); x--, y++) //Index of Element goes Backwards until it hits Last Char
+          if (wordGrid[row][x] != '-')
+            if (wordGrid[row][x] != s.charAt(y)){
+              canAddBack = false;
+              return false;
+            }
+      if (canAddBack = true)
+        for (int m = col, int n = (col + 1 - s.length()); m >= 0; m--, n++){
+          wordGrid[row][m] != s.charAt(n)
+          return true;
+        }
     }
+    return false;
   }
   
   public boolean addWordV(int row, int col, String s) {
