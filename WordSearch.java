@@ -56,7 +56,7 @@ public class WordSearch {
   }
   
   public boolean addWordV(int row, int col, String s) {
-    if (s.length > col.length) 
+    /*if (s.length > col.length) 
     //Basically this checks if it has enough room to put it ->return false if not
       return false;
       
@@ -65,7 +65,20 @@ public class WordSearch {
         wordGrid[row-i][col]=s.charAt(i);
         return true;
       }       
-    return false;
+    return false;*/
+    boolean canFitDown=true;
+    if (s.length() <= col.length) //change this idk how to check for size
+      while (canFitDown)
+        for (int i = row, int j = 0; i<wordGrid[j].length, j<wordGrid.length; i++, j++)
+          if (wordGrid[i][col] != "-")
+            if (wordGrid[i][col] != s.charAt(j))
+              canFitDown = false;
+    
+    if (canFitDown)
+      for (int a = row, int b = 0; a<wordGrid[b].length, b<wordGrid.length; a++, b++)
+        word[a][col] == s.charAt(b);
+    
+    //check for false
   }
   
   public boolean addWordD(int row, int col, String s) {
