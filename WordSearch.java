@@ -117,8 +117,8 @@ public class WordSearch {
       return true;
     }
     
-    else{ //backwards
-      
+    else { 
+      if ( (row + 1 >= s.length()) && (col + 1 >= s.length())
     }
   }
   
