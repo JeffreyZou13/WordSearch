@@ -98,6 +98,9 @@ public class WordSearch {
   }
   
   public boolean addWordD(int row, int col, String s) {
+    //Check avaiable spaces vertically and horizontally if each >= s.length()
+    //Can only add if true for both axis
+    
   }
   
   public void fillGrid() {
