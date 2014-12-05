@@ -38,6 +38,8 @@ public class WordSearch {
   public boolean addWordH(int row, int col, String s) {
     // If enough space to go forward, check forward; If result is false, Check Backwards
     // If not enough space to go foward, check backwards; enough space, then whats in spaces
+    if (row < 0 || col < 0 || row >= wordGrid.length() || col > wordGrid[0].length() ) // does not allow un-reasonable indexes
+      return false;
     boolean canAddFor = true;
     if (s.length() <= (wordGrid[row].length - col) ) //Checks if enough "space" for String going forward
       while (canAddFor == true)
@@ -100,7 +102,24 @@ public class WordSearch {
   public boolean addWordD(int row, int col, String s) {
     //Check avaiable spaces vertically and horizontally if each >= s.length()
     //Can only add if true for both axis
+    if (row < 0 || row >= wordGrid.length() || col < 0 || col >= wordGrid.length()) // Unreasonable Indexes
+      return false;
+    boolean canAddFor = true;
+    if ( (wordGrid.length() - row) >= s.length() && (wordGrid[row] - col) >= s.length() ) //Checks availabe forward space
+      for (int i = row, int j = col, int k = 0; j < (s.length() - 1 + col); i++, j++, k++) // Checks spaces for value; restriction by checking horizontal length 
+        if (wordGrid[i][j] != '-' && wordGrid[i][j] != s.charAt(k))
+          canAddFor = false;
+    else
+      canAddFor = false;
+    if (canAddFor == true) {
+      for (int a = row, int b = col, int c = 0; b < (s.length() - 1 + col); a++, b++, c++)
+        wordGrid[a][b] = s.charAt(c)
+      return true;
+    }
     
+    else{ //backwards
+      
+    }
   }
   
   public void fillGrid() {
