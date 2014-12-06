@@ -11,7 +11,7 @@ public class WordSearch{
     wordGrid = new char[10][10];
     for (int i=0;i<wordGrid.length;i++) 
       for (int j=0;j<wordGrid[i].length;j++) 
-        wordGrid[i][j]='-';
+        wordGrid[i][j] ='-';
   }
   
   public WordSearch (int rows, int cols) {
