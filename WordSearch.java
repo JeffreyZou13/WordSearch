@@ -111,42 +111,49 @@ if (s.length > col.length)
     
     //check for false
   }
-  
+*/ 
   public boolean addWordD(int row, int col, String s) {
     //Check avaiable spaces vertically and horizontally if each >= s.length()
     //Can only add if true for both axis
     if (row < 0 || row >= wordGrid.length || col < 0 || col >= wordGrid.length ) // Unreasonable Indexes
       return false;
     boolean canAddFor = true;
-    if ( (wordGrid.length - row) >= s.length() && (wordGrid[row].length - col) >= s.length() ) //Checks availabe forward space
-      for (int i = row, j = col, k = 0; j < (s.length() - 1 + col); i++, j++, k++) // Checks spaces for value; restriction by checking horizontal length 
-        if (wordGrid[i][j] != '-' && wordGrid[i][j] != s.charAt(k))
-          canAddFor = false;
-    else
+    if ( (wordGrid.length - row) >= s.length() && (wordGrid[row].length - col) >= s.length() ){ //Checks availabe forward space
+	for (int i = row, j = col, k = 0; j < (s.length() - 1 + col); i++, j++, k++){ // Checks spaces for value; restriction by checking horizontal length 
+	    if (wordGrid[i][j] != '-' && wordGrid[i][j] != s.charAt(k)){
+		canAddFor = false;
+	    }
+	}
+    }
+    else {
       canAddFor = false;
+    }
     if (canAddFor == true) {
-      for (int a = row, b = col, c = 0; b < (s.length() - 1 + col); a++, b++, c++)
+	for (int a = row, b = col, c = 0; c < s.length(); a++, b++, c++)
         wordGrid[a][b] = s.charAt(c);
       return true;
     }
-    
     else { 
       boolean canAddBack = true;
-      if ( (row + 1 >= s.length()) && (col + 1 >= s.length()) ) //Checks available backwards space
-        for(int x = col, y = row, z = 0; x >= (col - s.length() + 1); x--, y--, z++)
-          if( wordGrid[x][y] != '-' && wordGrid[x][y] != s.charAt(z))
-            return false;
-      else 
+      if ( (row + 1 >= s.length()) && (col + 1 >= s.length()) ) { //Checks available backwards space
+	  for(int x = col, y = row, z = 0; x >= (col - s.length() + 1); x--, y--, z++){
+	      if( wordGrid[x][y] != '-' && wordGrid[x][y] != s.charAt(z)){
+		  return false;
+	      }
+	  }
+      }
+      else {
         return false;
-        if (canAddBack == true) {
-            for(int f = col, o = row, g = 0; f >= (col - s.length() + 1); f--, o--, g++)
+      }
+      if (canAddBack == true) {
+	  for(int f = col, o = row, g = 0; g < s.length() ; f--, o--, g++)
               wordGrid[f][o] = s.charAt(g);
-            return true;
-        }
+	  return true;
+      }
     }
     return false;
   }
-  */
+ 
   public void fillGrid() {
     Random r = new Random();
     for (int i=0;i<wordGrid.length;i++) 
@@ -159,56 +166,55 @@ if (s.length > col.length)
   }
   
   public static void main(String[] args){
-    WordSearch ws = new WordSearch(); 
-        //working horizontal words
-        ws.addWordH(0, 0, "hello");
-        ws.addWordH(2, 4, "batman");
-        ws.addWordH(5, 1, "apple");
-
-        //Horizontal index error checking
-        ws.addWordH(-2, 4, "joker");
-        ws.addWordH(10, 4, "unicorn");  
-        ws.addWordH(3, -1, "cowboys");
-	ws.addWordH(5, 8, "dogs");
-
-        //horizontal collision checking
-	ws.addWordH(5, 3, "plow");
-	ws.addWordH(2, 0, "neato");
-        
-	/*
-	// working vertical words
-        ws.addWordV(1, 0, "nice");
-        ws.addWordV(4, 9, "yankee");
-        ws.addWordV(4, 4, "old");
-        
-        //Verical index error checking
-        ws.addWordV(-2, 4, "joker");
-        ws.addWordV(7, 4, "unicorn");   
-        ws.addWordV(3, -1, "cowboys");
-        ws.addWordV(5, 20, "dogs");
-        
-        //vertical collision checking
-        ws.addWordV(0, 4, "ores");
-        ws.addWordV(4, 9, "goober");
-	
-       
-        //working diagonal words
-        ws.addWordD(7, 0,  "cat");
-        ws.addWordD(0, 0, "home");
-        ws.addWordD(0, 3, "loam");
-        //Diagonal index error checking
-        ws.addWordD(-2, 0,  "cat");
-        ws.addWordD(3, -1,  "whelm");
-        ws.addWordD(7, 7,  "after");    
-
-        //Diagonal collision checking
-        ws.addWordD(0, 4, "ores");
-        ws.addWordD(4, 4, "oats");
-*/
-
-        System.out.println(ws);
-        
-        //ws.fillGrid();
-        System.out.println(ws);
+      WordSearch ws = new WordSearch(); 
+      //working horizontal words
+      ws.addWordH(0, 0, "hello");
+      ws.addWordH(2, 4, "batman");
+      ws.addWordH(5, 1, "apple");
+      
+      //Horizontal index error checking
+      ws.addWordH(-2, 4, "joker");
+      ws.addWordH(10, 4, "unicorn");  
+      ws.addWordH(3, -1, "cowboys");
+      ws.addWordH(5, 8, "dogs");
+      
+      //horizontal collision checking
+      ws.addWordH(5, 3, "plow");
+      ws.addWordH(2, 0, "neato");
+      
+      /*
+      // working vertical words
+      ws.addWordV(1, 0, "nice");
+      ws.addWordV(4, 9, "yankee");
+      ws.addWordV(4, 4, "old");
+      
+      //Verical index error checking
+      ws.addWordV(-2, 4, "joker");
+      ws.addWordV(7, 4, "unicorn");   
+      ws.addWordV(3, -1, "cowboys");
+      ws.addWordV(5, 20, "dogs");
+      
+      //vertical collision checking
+      ws.addWordV(0, 4, "ores");
+      ws.addWordV(4, 9, "goober");
+      */
+      
+      //working diagonal words
+      ws.addWordD(7, 0,  "cat");
+      ws.addWordD(0, 0, "home");
+      ws.addWordD(0, 3, "loam");
+      //Diagonal index error checking
+      ws.addWordD(-2, 0,  "cat");
+      ws.addWordD(3, -1,  "whelm");
+      ws.addWordD(7, 7,  "after");    
+      
+      //Diagonal collision checking
+      ws.addWordD(0, 4, "ores");
+      ws.addWordD(4, 4, "oats");
+      
+      System.out.println(ws);
+      
+      ws.fillGrid();
+      System.out.println(ws);
   }
 }
