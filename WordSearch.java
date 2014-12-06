@@ -25,7 +25,6 @@ public class WordSearch{
     String grid = "";
     for (int i = 0; i < wordGrid.length; i++) {
       for (int j = 0; j < wordGrid[i].length; j++) {
-        wordGrid[i][j] += (i * wordGrid[i].length) + j;
         grid += (wordGrid[i][j] + " ");
       }
       grid += "\n";
