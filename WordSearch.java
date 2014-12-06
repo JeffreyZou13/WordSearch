@@ -1,4 +1,5 @@
 import java.util.*;
+import java.io.*;
 
 public class WordSearch{
   private char[][] wordGrid;
@@ -12,6 +13,7 @@ public class WordSearch{
     for (int i=0;i<wordGrid.length;i++) 
       for (int j=0;j<wordGrid[i].length;j++) 
         wordGrid[i][j] ='-';
+    hidden = new ArrayList<String>();
   }
   
   public WordSearch (int rows, int cols) {
@@ -19,6 +21,7 @@ public class WordSearch{
     for (int i=0;i<wordGrid.length;i++) 
       for (int j=0;j<wordGrid[i].length;j++) 
         wordGrid[i][j]='-';
+    hidden = new ArrayList<String>();
   }
   
   public String toString() {
@@ -40,7 +43,7 @@ public class WordSearch{
   public boolean addWordH(int row, int col, String s) {
     // If enough space to go forward, check forward; If result is false, Check Backwards
     // If not enough space to go foward, check backwards; enough space, then whats in spaces
-    if (row < 0 || col < 0 || row >= wordGrid.length || col > wordGrid[0].length ) // does not allow un-reasonable indexes
+    if (row < 0 || col < 0 || row >= wordGrid.length || col >= wordGrid[0].length ) // does not allow un-reasonable indexes
       return false;
     boolean canAddFor = true;
     if (s.length() <= (wordGrid[row].length - col) ){ //Checks if enough "space" for String going forward
@@ -164,9 +167,61 @@ if (s.length > col.length)
           wordGrid[i][j] = c;
         }
   }
+    
+    public ArrayList<String> loadDictionary() {
+	String s = "zzz";
+	ArrayList<String> dictionary = new ArrayList<String>();
+	
+	try {
+	    FileReader f = new FileReader("wordlist.txt");
+	    BufferedReader b = new BufferedReader(f);
+	    
+	    while( s != null ) {
+		s = b.readLine();
+		if ( s != null )
+		    dictionary.add(s);
+            }
+        }
+	catch (IOException e) {}
+	
+	return dictionary;
+    }   
+    
+    public void addWords(int n){
+	Random r = new Random();
+	ArrayList<String> diction = loadDictionary();
+	for (int added = 0; added < n; added++){ //Stops when adds desired amount
+	    boolean addYet = false; //Tells if word had been added
+	    while (addYet == false){ //Will manufacture new word until one is added to grid
+		String possWord = diction.remove(r.nextInt(diction.size())); //remove prevents repeat of words, redundant checking of fit of word
+		String lowerWord = possWord.toLowerCase();
+		System.out.println(lowerWord);
+		for (int i = 0; i < wordGrid.length && addYet == false; i++){ //Both need addYet to assure word is only added one-time
+		    for (int j = 0; i < wordGrid[i].length && addYet == false; j++){
+			if (addWordH(i,j,lowerWord) == true){
+			    addYet = true;
+			    hidden.add(lowerWord);
+			    System.out.println(lowerWord);
+			}
+			/*	else if (addWordV(i,j,lowerWord) = true){
+			    addYet = true;
+			    hidden.add(lowerWord); 
+			    } */
+			else if (addWordD(i,j,lowerWord) == true){
+			    addYet = true;
+			    hidden.add(lowerWord);
+			    System.out.println(lowerWord);
+			}
+		    }
+		}
+	    }
+	}
+    }
+		     
   
   public static void main(String[] args){
       WordSearch ws = new WordSearch(); 
+      /*
       //working horizontal words
       ws.addWordH(0, 0, "hello");
       ws.addWordH(2, 4, "batman");
@@ -182,7 +237,7 @@ if (s.length > col.length)
       ws.addWordH(5, 3, "plow");
       ws.addWordH(2, 0, "neato");
       
-      /*
+      
       // working vertical words
       ws.addWordV(1, 0, "nice");
       ws.addWordV(4, 9, "yankee");
@@ -197,7 +252,7 @@ if (s.length > col.length)
       //vertical collision checking
       ws.addWordV(0, 4, "ores");
       ws.addWordV(4, 9, "goober");
-      */
+      
       
       //working diagonal words
       ws.addWordD(7, 0,  "cat");
@@ -212,8 +267,11 @@ if (s.length > col.length)
       ws.addWordD(0, 4, "ores");
       ws.addWordD(4, 4, "oats");
       
+      */
+     
       System.out.println(ws);
-      
+      ws.addWords(5);
+ 
       ws.fillGrid();
       System.out.println(ws);
   }
