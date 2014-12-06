@@ -43,36 +43,45 @@ public class WordSearch{
     if (row < 0 || col < 0 || row >= wordGrid.length || col > wordGrid[0].length ) // does not allow un-reasonable indexes
       return false;
     boolean canAddFor = true;
-    if (s.length() <= (wordGrid[row].length - col) ) //Checks if enough "space" for String going forward
-      while (canAddFor == true)
-        for (int i = col, j = 0; i < (s.length() + col - 1); i++, j++)//j is index of String
-          if (wordGrid[row][i] != '-')
-            if (wordGrid[row][i] != s.charAt(j))
-              canAddFor = false;
+    if (s.length() <= (wordGrid[row].length - col) ){ //Checks if enough "space" for String going forward
+	for (int i = col, j = 0; i < (s.length() + col); i++, j++){ //j is index of String
+	    if (wordGrid[row][i] != '-'){
+		if (wordGrid[row][i] != s.charAt(j)){
+		    canAddFor = false;
+		}
+	    }
+	}
+    }
+    
     else
       canAddFor = false;
+    
     if (canAddFor == true){ //If can add forward, won't check backwards
-      for (int a = col, b = 0; a <s.length() + col - 1; a++, b++)
-        wordGrid[row][a] = s.charAt(b);
-      return true;
+	for (int a = col, b = 0; b < s.length(); a++, b++)
+	    wordGrid[row][a] = s.charAt(b);
+	return true;
     }
     
     else{ //Backwards Check
       boolean canAddBack = true;
-      if(s.length() <= (col + 1) ) // Length Check
-        for (int x = col, y = 0; x >= (col + 1 - s.length()); x--, y++) //Index of Element goes Backwards until it hits Last Char
-          if (wordGrid[row][x] != '-')
-            if (wordGrid[row][x] != s.charAt(y)){
-              canAddBack = false;
-              return false;
-            }
+      if (s.length() <= (col + 1) ){ // Length Check
+	  for (int x = col, y = 0; y < s.length(); x--, y++){
+	      if (wordGrid[row][x] != '-'){
+		  if (wordGrid[row][x] != s.charAt(y)){
+		      canAddBack = false;
+		      return false;
+		  }
+	      }
+	  }
+      }
       else
         return false;
-      if (canAddBack = true)
-        for (int m = col, n = (col + 1 - s.length()); m >= 0; m--, n++){
-          wordGrid[row][m] = s.charAt(n);
-          return true;
-        }
+      if (canAddBack = true){
+	  for (int m = col, n = 0; m>= (col + 1 - s.length()); m--, n++){
+	      wordGrid[row][m] = s.charAt(n);
+	  }    
+	  return true;
+      }
     }
     return false;
   }
@@ -150,8 +159,7 @@ if (s.length > col.length)
   }
   
   public static void main(String[] args){
-    WordSearch ws = new WordSearch();
-       /* 
+    WordSearch ws = new WordSearch(); 
         //working horizontal words
         ws.addWordH(0, 0, "hello");
         ws.addWordH(2, 4, "batman");
@@ -161,13 +169,14 @@ if (s.length > col.length)
         ws.addWordH(-2, 4, "joker");
         ws.addWordH(10, 4, "unicorn");  
         ws.addWordH(3, -1, "cowboys");
-        ws.addWordH(5, 8, "dogs");
+	ws.addWordH(5, 8, "dogs");
 
         //horizontal collision checking
-        ws.addWordH(5, 3, "plow");
-        ws.addWordH(2, 0, "neato");
+	ws.addWordH(5, 3, "plow");
+	ws.addWordH(2, 0, "neato");
         
-        working vertical words
+	/*
+	// working vertical words
         ws.addWordV(1, 0, "nice");
         ws.addWordV(4, 9, "yankee");
         ws.addWordV(4, 4, "old");
