@@ -64,6 +64,8 @@ public class WordSearch {
               canAddBack = false;
               return false;
             }
+      else
+        return false;
       if (canAddBack = true)
         for (int m = col, int n = (col + 1 - s.length()); m >= 0; m--, n++){
           wordGrid[row][m] != s.charAt(n)
@@ -118,8 +120,20 @@ public class WordSearch {
     }
     
     else { 
-      if ( (row + 1 >= s.length()) && (col + 1 >= s.length())
+      boolean canAddBack = true;
+      if ( (row + 1 >= s.length()) && (col + 1 >= s.length()) //Checks available backwards space
+        for(int x = col, int y = row, int z = 0; x >= (col - s.length() + 1); x--, y--, z++
+          if( wordGrid[x][y] != '-' && wordGrid[x][y] != s.charAt(z))
+            return false;
+      else 
+        return false;
+        if (canAddBack == true) {
+            for(int f = col, int o = row, int g = 0; f >= (col - s.length() + 1); f--, o--, g++
+              wordGrid[f][o] = s.charAt(g);
+            return true;
+        }
     }
+    return false;
   }
   
   public void fillGrid() {
