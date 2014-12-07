@@ -122,7 +122,7 @@ if (s.length > col.length)
       return false;
     boolean canAddFor = true;
     if ( (wordGrid.length - row) >= s.length() && (wordGrid[row].length - col) >= s.length() ){ //Checks availabe forward space
-	for (int i = row, j = col, k = 0; j < (s.length() - 1 + col); i++, j++, k++){ // Checks spaces for value; restriction by checking horizontal length 
+	for (int i = row, j = col, k = 0; k < s.length(); i++, j++, k++){ // Checks spaces for value; restriction by checking horizontal length 
 	    if (wordGrid[i][j] != '-' && wordGrid[i][j] != s.charAt(k)){
 		canAddFor = false;
 	    }
