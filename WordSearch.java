@@ -88,33 +88,47 @@ public class WordSearch{
     }
     return false;
   }
-/*
+
   public boolean addWordV(int row, int col, String s) {
-if (s.length > col.length) 
-    //Basically this checks if it has enough room to put it ->return false if not
-      return false;
-      
-    for (int i=row;i < s.length+row-1;i++)
-      if (s.length-(row+i)>0 && wordGrid[row][col]==s.charAt(i)) { 
-        wordGrid[row-i][col]=s.charAt(i);
-        return true;
-      }       
+    if (row < 0 || col < 0 || row >= wordGrid.length || col >= wordGrid[0].length) 
+	 return false;
+    
+    boolean canAddDown = true;  
+    if (s.length <= (wordGrid[col].length - row)) {
+    	for (int i=row, j =0;i < s.length+row;i++,j++)
+      		if (wordGrid[i][col] != '-')
+      			if (wordGrid[i][col] != s.charAt(j))
+      				canAddDown = false;
+    }
+    else {
+    	return false;
+    }
+    
+    if (canAddDown) {
+    	for (int a =row, b = 0; b < s.length; a++, b++)
+    		wordGrid[a][col] = s.charAt(b);
+    	return true;
+    }
+    
+    else {
+    	boolean canAddUp = true;
+    	if (s.length <= row+1)
+    		for (int p=row, q=0; q < s.length(); p--, q++)
+    			if (wordGrid[p][col] != '-')
+    				if (wordGrid[p][col] != s.charAt(q))
+    					canAddUp = false;
+    					return false;
+    	else 
+    		return false;
+    	if (canAddUp) {
+    		for (int x = row, y = 0; y >= row + 1 - s.length(); x--, y++)
+    			wordGrid[x][col] = s.charAt(y);
+    		return true;
+    	}
+    }
     return false;
-    boolean canFitDown=true;
-    if (s.length() <= col.length) //change this idk how to check for size
-      while (canFitDown)
-        for (int i = row, int j = 0; i<wordGrid[j].length; i++, j++)
-          if (wordGrid[i][col] != "-")
-            if (wordGrid[i][col] != s.charAt(j))
-              canFitDown = false;
-    
-    if (canFitDown)
-      for (int a = row, int b = 0; a<wordGrid[b].length; a++, b++)
-        word[a][col] == s.charAt(b);
-    
-    //check for false
   }
-*/ 
+
   public boolean addWordD(int row, int col, String s) {
     //Check avaiable spaces vertically and horizontally if each >= s.length()
     //Can only add if true for both axis
