@@ -190,36 +190,24 @@ if (s.length > col.length)
     public void addWords(int n){
 	Random r = new Random();
 	ArrayList<String> diction = loadDictionary();
-	for (int added = 0; added < n; added++){ //Stops when adds desired amount
-	    boolean addYet = false; //Tells if word had been added
-	    while (addYet == false){ //Will manufacture new word until one is added to grid
-		String possWord = diction.remove(r.nextInt(diction.size())); //remove prevents repeat of words, redundant checking of fit of word
-		String lowerWord = possWord.toLowerCase();
-		boolean addPart == false; //Checks if the particular, random word was added
-		for (int i = 0; i < wordGrid.length && addPart == false; i++){ //Both need addYet to assure word is only added one-time
-		    for (int j = 0; i < wordGrid[i].length && addPart == false; j++){
-			if (addWordH(i,j,lowerWord) == true){
-			    hidden.add(lowerWord);
-			    System.out.println(lowerWord);
-			    addPart = true;
+	while (hidden.size() < n){
+		boolean addedYet = false;
+		while (addedYet == false){
+			String possWord = (diction.remove(r.nextInt(diction.size()))).toLowerCase;
+			for (int row = 0; row < wordGrid.length && addedYet == false; row++){
+				for(int col = 0; col <wordGrid[row].length && addedYet == false; row++){
+					if (addWordH(row, col, possWord))
+						addedYet == true;
+						hidden.add(possWord);
+					else if (addWordD(row, col, possWord)){
+						addedYet == true;
+						hidden.add(possWord)
+					}
+				}
 			}
-			/*	else if (addWordV(i,j,lowerWord) = true){
-			    addYet = true;
-			    hidden.add(lowerWord); 
-			    } */
-			else if (addWordD(i,j,lowerWord) == true){
-			    hidden.add(lowerWord);
-			    System.out.println(lowerWord);
-			    addPart = true;
-			}
-		    }
 		}
-		if (addPart == true){
-			addYet = true;
-		}
-	    }
 	}
-    }
+    }	
 		     
   
   public static void main(String[] args){
@@ -230,7 +218,7 @@ if (s.length > col.length)
       ws.addWordH(2, 4, "batman");
       ws.addWordH(5, 1, "apple");
       
-      //Horizontal index error checking
+      //Horizontal index error checkingh
       ws.addWordH(-2, 4, "joker");
       ws.addWordH(10, 4, "unicorn");  
       ws.addWordH(3, -1, "cowboys");
