@@ -32,11 +32,11 @@ public class WordSearch{
       }
       grid += "\n";
     }
-    grid += ("\n" + "Words in Grid:");
-    /*for (int k = 0 ; k < hidden.size(); k++) {
+    grid += ("\n" + "Words in Grid: \n");
+    for (int k = 0 ; k < hidden.size(); k++) {
       grid += (hidden.get(k) + "\n");
     }
-*/
+
     return grid;
   }
   
@@ -193,15 +193,16 @@ if (s.length > col.length)
 	while (hidden.size() < n){
 		boolean addedYet = false;
 		while (addedYet == false){
-			String possWord = (diction.remove(r.nextInt(diction.size()))).toLowerCase;
+			String possWord = (diction.remove(r.nextInt(diction.size()))).toLowerCase();
 			for (int row = 0; row < wordGrid.length && addedYet == false; row++){
-				for(int col = 0; col <wordGrid[row].length && addedYet == false; row++){
-					if (addWordH(row, col, possWord))
-						addedYet == true;
+				for(int col = 0; col < wordGrid[row].length && addedYet == false; col++){
+					if (addWordH(row, col, possWord)) {
+						addedYet = true;
 						hidden.add(possWord);
+					}
 					else if (addWordD(row, col, possWord)){
-						addedYet == true;
-						hidden.add(possWord)
+						addedYet = true;
+						hidden.add(possWord);
 					}
 				}
 			}
@@ -261,7 +262,8 @@ if (s.length > col.length)
       */
      
       System.out.println(ws);
-      ws.addWords(5);
+      ws.addWords(15);
+      System.out.println(ws);
  
       ws.fillGrid();
       System.out.println(ws);
