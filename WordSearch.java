@@ -60,6 +60,7 @@ public class WordSearch{
       canAddFor = false;
     
     if (canAddFor == true){ //If can add forward, won't check backwards
+	hidden.add(s);
 	for (int a = col, b = 0; b < s.length(); a++, b++)
 	    wordGrid[row][a] = s.charAt(b);
 	return true;
@@ -80,6 +81,7 @@ public class WordSearch{
       else
         return false;
       if (canAddBack = true){
+	  hidden.add(s);
 	  for (int m = col, n = 0; m>= (col + 1 - s.length()); m--, n++){
 	      wordGrid[row][m] = s.charAt(n);
 	  }    
@@ -94,36 +96,45 @@ public class WordSearch{
 	 return false;
     
     boolean canAddDown = true;  
-    if (s.length <= (wordGrid[col].length - row)) {
-    	for (int i=row, j =0;i < s.length+row;i++,j++)
+    if (s.length() <= (wordGrid[col].length - row)) {
+    	for (int i=row, j =0;i < s.length()+row;i++,j++)
       		if (wordGrid[i][col] != '-')
       			if (wordGrid[i][col] != s.charAt(j))
       				canAddDown = false;
     }
     else {
-    	return false;
+    	canAddDown = false;
     }
     
     if (canAddDown) {
-    	for (int a =row, b = 0; b < s.length; a++, b++)
+    	hidden.add(s);
+	for (int a =row, b = 0; b < s.length(); a++, b++)
     		wordGrid[a][col] = s.charAt(b);
     	return true;
     }
     
     else {
     	boolean canAddUp = true;
-    	if (s.length <= row+1)
-    		for (int p=row, q=0; q < s.length(); p--, q++)
-    			if (wordGrid[p][col] != '-')
-    				if (wordGrid[p][col] != s.charAt(q))
-    					canAddUp = false;
-    					return false;
-    	else 
-    		return false;
+    	if (s.length() <= row + 1){
+	    for (int p=row, q=0; q < s.length(); p--, q++){
+		if (wordGrid[p][col] != '-'){
+		    if (wordGrid[p][col] != s.charAt(q)){
+			canAddUp = false;
+			return false;
+		    }
+		}
+	    }
+	}
+	else{
+	    canAddUp = false;
+	    return false;
+	}
     	if (canAddUp) {
-    		for (int x = row, y = 0; y >= row + 1 - s.length(); x--, y++)
-    			wordGrid[x][col] = s.charAt(y);
-    		return true;
+	    hidden.add(s);
+	    for (int x = row, y = 0; y < s.length(); x--, y++){
+		wordGrid[x][col] = s.charAt(y);
+	    }
+    	    return true;
     	}
     }
     return false;
@@ -146,9 +157,10 @@ public class WordSearch{
       canAddFor = false;
     }
     if (canAddFor == true) {
+	hidden.add(s);
 	for (int a = row, b = col, c = 0; c < s.length(); a++, b++, c++)
-        wordGrid[a][b] = s.charAt(c);
-      return true;
+	    wordGrid[a][b] = s.charAt(c);
+	return true;
     }
     else { 
       boolean canAddBack = true;
@@ -163,6 +175,7 @@ public class WordSearch{
         return false;
       }
       if (canAddBack == true) {
+	  hidden.add(s);
 	  for(int f = col, o = row, g = 0; g < s.length() ; f--, o--, g++)
               wordGrid[f][o] = s.charAt(g);
 	  return true;
@@ -211,12 +224,13 @@ public class WordSearch{
 			for (int row = 0; row < wordGrid.length && addedYet == false; row++){
 				for(int col = 0; col < wordGrid[row].length && addedYet == false; col++){
 					if (addWordH(row, col, possWord)) {
-						addedYet = true;
-						hidden.add(possWord);
+					    addedYet = true;
 					}
 					else if (addWordD(row, col, possWord)){
-						addedYet = true;
-						hidden.add(possWord);
+					    addedYet = true;
+					}
+					else if (addWordV(row,col,possWord)) {
+					    addedYet = true;
 					}
 				}
 			}
@@ -227,6 +241,7 @@ public class WordSearch{
   
   public static void main(String[] args){
       WordSearch ws = new WordSearch(); 
+      
       /*
       //working horizontal words
       ws.addWordH(0, 0, "hello");
@@ -272,14 +287,14 @@ public class WordSearch{
       //Diagonal collision checking
       ws.addWordD(0, 4, "ores");
       ws.addWordD(4, 4, "oats");
-      
       */
+      
      
       System.out.println(ws);
-      ws.addWords(15);
+      ws.addWords(10);
       System.out.println(ws);
  
       ws.fillGrid();
-      System.out.println(ws);
+      System.out.println(ws); 
   }
 }
