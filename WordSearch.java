@@ -1,3 +1,4 @@
+//Word Search by Justin Pacquing and Jeffrey Zou
 import java.util.*;
 import java.io.*;
 
