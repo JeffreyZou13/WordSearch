@@ -195,7 +195,6 @@ if (s.length > col.length)
 	    while (addYet == false){ //Will manufacture new word until one is added to grid
 		String possWord = diction.remove(r.nextInt(diction.size())); //remove prevents repeat of words, redundant checking of fit of word
 		String lowerWord = possWord.toLowerCase();
-		System.out.println(lowerWord);
 		for (int i = 0; i < wordGrid.length && addYet == false; i++){ //Both need addYet to assure word is only added one-time
 		    for (int j = 0; i < wordGrid[i].length && addYet == false; j++){
 			if (addWordH(i,j,lowerWord) == true){
